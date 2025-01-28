@@ -2,20 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gentle Reflections - Lunar New Year</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar New Year - Lunar New Year</title>
     <style>
+        /* Global Fixes */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --main-color: #f8d7da;
-            --accent-color: #d8a8b1;
+            --accent-color: #d4535e;
             --text-color: #5a3a3e;
+            --gold-color: #ffd700;
         }
 
         body {
             background: linear-gradient(135deg, #fff5f5, #ffe6e6);
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Cormorant Garamond', 'Microsoft JhengHei', serif;
             min-height: 100vh;
             color: var(--text-color);
             overflow-x: hidden;
+        }
+
+        /* Petals Container */
+        #petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
@@ -23,17 +41,19 @@
             margin: 0 auto;
             padding: 2rem;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Slideshow Styles */
+        /* Improved Slideshow */
         .slideshow-container {
             position: relative;
-            height: 400px;
-            margin: 2rem auto;
-            border-radius: 10px;
+            height: 1280px;
+            margin: 3rem auto;
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(218, 150, 148, 0.2);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 8px 25px rgba(218, 150, 148, 0.3);
         }
 
         .slide {
@@ -41,233 +61,239 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            animation: slideShow 36s infinite;
+            animation: slideShow 42s infinite;
+            transition: all 1s ease;
+            background: var(--main-color);
+            animation-fill-mode: both;
         }
 
         .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: sepia(30%) brightness(0.9);
+            filter: sepia(20%) brightness(0.95);
+            transition: transform 1s ease;
         }
 
         @keyframes slideShow {
-            0%, 100% { opacity: 0; }
-            5% { opacity: 1; }
-            15% { opacity: 1; }
-            20% { opacity: 0; }
+            0%, 100% { opacity: 0; transform: scale(1.02); }
+            3% { opacity: 1; transform: scale(1); }
+            15% { opacity: 1; transform: scale(1); }
+            18% { opacity: 0; transform: scale(1.02); }
         }
 
         .slide:nth-child(1) { animation-delay: 0s; }
-        .slide:nth-child(2) { animation-delay: 6s; }
-        .slide:nth-child(3) { animation-delay: 12s; }
-        .slide:nth-child(4) { animation-delay: 18s; }
-        .slide:nth-child(5) { animation-delay: 24s; }
-        .slide:nth-child(6) { animation-delay: 30s; }
+        .slide:nth-child(2) { animation-delay: 4s; }
+        .slide:nth-child(3) { animation-delay: 8s; }
+        .slide:nth-child(4) { animation-delay: 12s; }
+        .slide:nth-child(5) { animation-delay: 16s; }
+        .slide:nth-child(6) { animation-delay: 20s; }
 
-        /* Message Box Section */
+        /* Enhanced Message Box */
         .message-container {
-            margin: 3rem 0 1rem 0;
+            margin: 4rem 0 2rem 0;
             perspective: 1000px;
         }
 
-        .click-prompt {
-            font-size: 1.1rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-
         .message-box {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 1rem;
+            background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(248,215,218,0.2));
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 1.5rem;
             cursor: pointer;
-            transition: all 0.5s ease;
-            max-width: 600px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 680px;
             margin: 0 auto;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 20px rgba(90, 58, 62, 0.1);
+            touch-action: manipulation;
         }
 
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
+        .message-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(90, 58, 62, 0.15);
         }
 
         .message-title {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            letter-spacing: 1px;
-            color: var(--text-color);
-        }
-
-        .chevron {
-            transition: transform 0.5s ease;
-            opacity: 0.7;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
             color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
         }
 
-        .message-content {
+        .hidden-text {
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: all 0.8s ease;
-            padding: 0 1rem;
+            transition: all 0.5s ease;
+            border-top: 0 solid transparent;
+            padding: 0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            background: linear-gradient(to right, var(--accent-color), var(--text-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .message-box.active .message-content {
+        .message-box.active .hidden-text {
             max-height: 500px;
             opacity: 1;
-            padding: 1rem;
+            border-top: 2px dashed var(--accent-color);
+            padding: 1.5rem 0 0;
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+            display: inline-block;
         }
 
         .message-box.active .chevron {
             transform: rotate(180deg);
         }
 
-        .hidden-text {
-            border-top: 1px solid var(--accent-color);
-            padding-top: 1rem;
-            line-height: 1.8;
-            opacity: 0.9;
-            font-style: italic;
-            color: var(--text-color);
-        }
-
         /* New Year Wish Section */
         .new-year-wish {
-            margin: 2rem 0;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            animation: float 3s ease-in-out infinite;
+            margin: 3rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            border: 2px solid var(--gold-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        .new-year-wish::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 25px,
+                var(--gold-color) 25px,
+                var(--gold-color) 50px
+            );
+            opacity: 0.1;
+            animation: shine 20s linear infinite;
+        }
+
+        @keyframes shine {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Falling Petals Animation */
-        .petals {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
         .petal {
+            animation: fall 15s linear infinite;
+            opacity: 0.7;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
             position: absolute;
-            color: #f4c2c2;
-            animation: fall 12s linear infinite;
-            opacity: 0.5;
         }
 
         @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.6; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0; }
+            20% { opacity: 0.8; transform: scale(1.1); }
+            100% { transform: translateY(110vh) rotate(720deg) scale(0.6); opacity: 0; }
         }
 
         .header {
-            font-size: 2.8rem;
-            margin: 2rem 0;
-            opacity: 0.9;
-            animation: fadeIn 3s ease-out;
-            color: var(--text-color);
+            font-size: 3.5rem;
+            margin: 3rem 0;
+            position: relative;
+            display: inline-block;
+            font-family: 'Zhi Mang Xing', cursive;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 0.9; transform: translateY(0); }
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slideshow-container {
+                height: 300px;
+                margin: 1.5rem auto;
+            }
+
+            .header {
+                font-size: 2.5rem;
+            }
+
+            .new-year-wish {
+                font-size: 1.2rem;
+                padding: 1rem;
+            }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="petals" id="petals"></div>
     
     <div class="container">
-        <h1 class="header">🌸 Gentle Reflections</h1>
+        <h1 class="header">春节快乐！ • Lunar New Year</h1>
 
         <div class="slideshow-container">
-            <!-- Add your 6 images here -->
-            <div class="slide">
-                <img src="Memory1.jpg" alt="Memory 1">
-            </div>
-            <div class="slide">
-                <img src="Memory2.jpg" alt="Memory 2">
-            </div>
-            <div class="slide">
-                <img src="Memory3.jepg" alt="Memory 3">
-            </div>
-        </div>
-            <div class="slide">
-                <img src="Memory4.jepg" alt="Memory 4">
-            </div>
-            <div class="slide">
-                <img src="Memory5.jpg" alt="Memory 5">
-            </div>
-            <div class="slide">
-                <img src="Memory6.jpg" alt="Memory 6">
-            </div>
+            <div class="slide"><img src="MEI/Memory1.jpg" alt="Memory 1"></div>
+            <div class="slide"><img src="MEI/Memory2.jpg" alt="Memory 2"></div>
+            <div class="slide"><img src="MEI/Memory3.jpg" alt="Memory 3"></div>
+            <div class="slide"><img src="MEI/Memory4.jpg" alt="Memory 4"></div>
+            <div class="slide"><img src="MEI/Memory5.jpg" alt="Memory 5"></div>
+            <div class="slide"><img src="MEI/Memory6.jpg" alt="Memory 6"></div>
         </div>
 
         <div class="message-container">
-            <div class="click-prompt">Click Here</div>
             <div class="message-box" onclick="this.classList.toggle('active')">
                 <div class="message-header">
-                    <span class="message-title">Whispers of the Heart</span>
-                    <span class="chevron">▼</span>
+                    <span class="message-title">✿ กดตรงนี้ครับ ✿</span>
+                    <span class="chevron">❀</span>
                 </div>
                 <div class="message-content">
                     <p class="hidden-text">
-                        In the soft glow of fading lantern light,<br>
-                        Memories drift like cherry blossoms in spring.<br>
-                        Each moment a petal, delicate and bright,<br>
-                        Carrying whispers of what love used to bring.<br><br>
+                        หนูรู้ไหม... ไม่ว่าวันนี้เราจะต้องแยกจากกัน แต่พี่อยากให้หนูรู้ว่าพี่ไม่เคยเสียใจที่เคยมีหนูอยู่ในชีวิต พี่ภูมิใจเสมอ<br>
+                        ที่ครั้งหนึ่งเราสองเคยรักกัน เคยดูแลกัน และเคยเป็นความสุขของกันและกัน<br>
+                        พี่อยากให้หนูรู้ว่า ทุกความทรงจำที่เราสร้างมาด้วยกัน มันจะยังอยู่ในใจพี่เสมอ เสียงหัวเราะของหนู รอยยิ้มที่เคย<br>
+                        ทำให้พี่มีความสุข ทุกช่วงเวลาที่เราเคยผ่านมันมาด้วยกัน พี่ไม่มีวันลืมเลย<br><br>
                         
-                        The new year dawns with gentle hues,<br>
-                        Painting the sky in blush and pearl.<br>
-                        May time's embrace bring healing views,<br>
-                        And peace to every boy and girl.<br><br>
+                        จากวันนี้ไป ขอให้หนูดูแลตัวเองให้ดีนะ ขอให้หนูได้พบกับความสุข เจอคนที่รักและดูแลหนูได้อย่างที่หนูสมควรได้รับ <br>
+                        พี่อาจจะไม่ได้อยู่ตรงนี้เพื่อกอดหรือปลอบโยนหนูอีกแล้ว แต่ขอให้หนูรู้ไว้ว่าพี่จะคอยเอาใจช่วยอยู่ห่างๆ เสมอ<br><br>
                         
-                        Though paths may part like morning mist,<br>
-                        In this quiet space, I wish you well -<br>
-                        May your days be kissed by happiness,<br>
-                        And your heart find stories new to tell.
+                        พี่ยังรักเเละคิดถึงหนูอยู่ตลอดนะคับ...
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- New Year Wish Section -->
         <div class="new-year-wish">
-            🧧 新年快乐，万事如意！ 🎉<br>
-            Happy Chinese New Year, Wishing You Prosperity and Joy!
+            🏮 新春吉祥 萬事如意 🎋<br>
+            尽管我们的道路已经改变但我祝愿你人生的每一步都幸福。中国新年快乐<br>
+            (ถึงแม้ว่าเส้นทางของเราจะเปลี่ยนไป แต่พี่ก็ขอให้หนูมีความสุขในทุกย่างก้าว สุขสันต์วันตรุษจีนครับ)
         </div>
     </div>
 
     <script>
-        // Create falling petals
         function createPetals() {
             const petalsContainer = document.getElementById('petals');
-            const symbols = ['❀', '✿', '❁', '✽', '•'];
-            for(let i = 0; i < 25; i++) {
+            const symbols = ['🌸', '🎋', '🏮', '✨', '🍊'];
+            for(let i = 0; i < 30; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
                 petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
                 petal.style.left = Math.random() * 100 + '%';
-                petal.style.animationDelay = Math.random() * 8 + 's';
-                petal.style.fontSize = Math.random() * 14 + 8 + 'px';
+                petal.style.animationDelay = Math.random() * 10 + 's';
+                petal.style.fontSize = Math.random() * 20 + 12 + 'px';
+                petal.style.animationDuration = Math.random() * 5 + 10 + 's';
                 petalsContainer.appendChild(petal);
             }
         }
