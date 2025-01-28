@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gentle Reflections - Lunar New Year</title>
+    <style>
+        :root {
+            --main-color: #f8d7da;
+            --accent-color: #d8a8b1;
+            --text-color: #5a3a3e;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+            font-family: 'Cormorant Garamond', serif;
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(218, 150, 148, 0.2);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: slideShow 36s infinite;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(30%) brightness(0.9);
+        }
+
+        @keyframes slideShow {
+            0%, 100% { opacity: 0; }
+            5% { opacity: 1; }
+            15% { opacity: 1; }
+            20% { opacity: 0; }
+        }
+
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 6s; }
+        .slide:nth-child(3) { animation-delay: 12s; }
+        .slide:nth-child(4) { animation-delay: 18s; }
+        .slide:nth-child(5) { animation-delay: 24s; }
+        .slide:nth-child(6) { animation-delay: 30s; }
+
+        /* Message Box Section */
+        .message-container {
+            margin: 3rem 0 1rem 0;
+            perspective: 1000px;
+        }
+
+        .click-prompt {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(3px);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+        }
+
+        .message-title {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+            color: var(--text-color);
+        }
+
+        .chevron {
+            transition: transform 0.5s ease;
+            opacity: 0.7;
+            color: var(--accent-color);
+        }
+
+        .message-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.8s ease;
+            padding: 0 1rem;
+        }
+
+        .message-box.active .message-content {
+            max-height: 500px;
+            opacity: 1;
+            padding: 1rem;
+        }
+
+        .message-box.active .chevron {
+            transform: rotate(180deg);
+        }
+
+        .hidden-text {
+            border-top: 1px solid var(--accent-color);
+            padding-top: 1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        /* New Year Wish Section */
+        .new-year-wish {
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Falling Petals Animation */
+        .petals {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .petal {
+            position: absolute;
+            color: #f4c2c2;
+            animation: fall 12s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .header {
+            font-size: 2.8rem;
+            margin: 2rem 0;
+            opacity: 0.9;
+            animation: fadeIn 3s ease-out;
+            color: var(--text-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 0.9; transform: translateY(0); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="petals" id="petals"></div>
+    
+    <div class="container">
+        <h1 class="header">🌸 Gentle Reflections</h1>
+
+        <div class="slideshow-container">
+            <!-- Add your 6 images here -->
+            <div class="slide">
+                <img src="Memory1.jpg" alt="Memory 1">
+            </div>
+            <div class="slide">
+                <img src="Memory2.jpg" alt="Memory 2">
+            </div>
+            <div class="slide">
+                <img src="Memory3.jepg" alt="Memory 3">
+            </div>
+        </div>
+            <div class="slide">
+                <img src="Memory4.jepg" alt="Memory 4">
+            </div>
+            <div class="slide">
+                <img src="Memory5.jpg" alt="Memory 5">
+            </div>
+            <div class="slide">
+                <img src="Memory6.jpg" alt="Memory 6">
+            </div>
+        </div>
+
+        <div class="message-container">
+            <div class="click-prompt">Click Here</div>
+            <div class="message-box" onclick="this.classList.toggle('active')">
+                <div class="message-header">
+                    <span class="message-title">Whispers of the Heart</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <div class="message-content">
+                    <p class="hidden-text">
+                        In the soft glow of fading lantern light,<br>
+                        Memories drift like cherry blossoms in spring.<br>
+                        Each moment a petal, delicate and bright,<br>
+                        Carrying whispers of what love used to bring.<br><br>
+                        
+                        The new year dawns with gentle hues,<br>
+                        Painting the sky in blush and pearl.<br>
+                        May time's embrace bring healing views,<br>
+                        And peace to every boy and girl.<br><br>
+                        
+                        Though paths may part like morning mist,<br>
+                        In this quiet space, I wish you well -<br>
+                        May your days be kissed by happiness,<br>
+                        And your heart find stories new to tell.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Year Wish Section -->
+        <div class="new-year-wish">
+            🧧 新年快乐，万事如意！ 🎉<br>
+            Happy Chinese New Year, Wishing You Prosperity and Joy!
+        </div>
+    </div>
+
+    <script>
+        // Create falling petals
+        function createPetals() {
+            const petalsContainer = document.getElementById('petals');
+            const symbols = ['❀', '✿', '❁', '✽', '•'];
+            for(let i = 0; i < 25; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDelay = Math.random() * 8 + 's';
+                petal.style.fontSize = Math.random() * 14 + 8 + 'px';
+                petalsContainer.appendChild(petal);
+            }
+        }
+
+        window.addEventListener('load', createPetals);
+    </script>
+</body>
+</html>
